@@ -10,6 +10,7 @@ import com.example.beatbox.databinding.ActivityMainBinding
 import com.example.beatbox.databinding.SoundButtonItemBinding
 import com.example.beatbox.data.BeatBox
 import com.example.beatbox.domain.model.Sound
+import com.example.beatbox.ui.viewmodels.SoundViewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -91,7 +92,15 @@ class MainActivity : AppCompatActivity() {
             RecyclerView.ViewHolder(binding.root){
 
             fun bind(sound: Sound){
-                binding.soundButton.text = sound.name
+
+                binding.apply {
+
+                    viewmodel = SoundViewModel(beatBox)
+
+                    viewmodel?.sound = sound
+
+                    executePendingBindings()
+                }
             }
         }
     }

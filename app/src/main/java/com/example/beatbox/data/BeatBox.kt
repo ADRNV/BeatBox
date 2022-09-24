@@ -2,16 +2,24 @@ package com.example.beatbox.data
 
 import android.content.res.AssetManager
 import android.graphics.Color
+import android.media.SoundPool
 import android.util.Log
 import com.example.beatbox.domain.model.Sound
+import java.io.IOException
 
 private const val TAG = "BeatBox"
 
 private const val SOUNDS_FOLDER = "sample_sounds"
 
+private const val MAX_SOUNDS = 10
+
 class BeatBox(private val assets:AssetManager) {
 
     val sounds:List<Sound> = loadSounds()
+
+    private val soundPool = SoundPool.Builder()
+        .setMaxStreams(MAX_SOUNDS)
+        .build()
 
     private fun loadSounds():List<Sound>{
 
@@ -36,9 +44,36 @@ class BeatBox(private val assets:AssetManager) {
 
             val sound = Sound(soundAssetPath)
 
-            sounds.add(sound)
+            try {
+
+                load(sound)
+
+                sounds.add(sound)
+
+            }catch (ioException:IOException){
+                Log.d(TAG, ioException.toString(), ioException)
+            }
         }
 
         return sounds
+    }
+
+    private fun load(sound: Sound){
+
+        val afd = assets.openFd(sound.assetPath)
+
+        val soundId = soundPool.load(afd, 1)
+
+        sound.soundId = soundId
+    }
+
+    fun play(sound: Sound){
+
+        sound.soundId?.let {
+
+            soundPool.play(it, 1.0f, 1.0f, 1, 0, 1.0f)
+
+        }
+
     }
 }
