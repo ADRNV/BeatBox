@@ -55,6 +55,8 @@ class MainActivity : AppCompatActivity() {
                 parent,
                 false)
 
+            binding.lifecycleOwner = this@MainActivity
+
             return when(viewType){
 
                 1 -> {

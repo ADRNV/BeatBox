@@ -6,20 +6,21 @@ import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.example.beatbox.data.BeatBox
 import com.example.beatbox.domain.model.Sound
 
-class SoundViewModel(private val beatBox: BeatBox) : BaseObservable() {
+class SoundViewModel(private val beatBox: BeatBox) : ViewModel() {
 
     var sound:Sound? = null
     set(value) {
         field = value
-        notifyChange()
+        title.postValue(sound?.name)
     }
 
-    @get:Bindable
-    val title:String?
-    get() = sound?.name
+    val title:MutableLiveData<String?> = MutableLiveData()
 
     @RequiresApi(Build.VERSION_CODES.S)
     fun onClick(){
@@ -36,5 +37,7 @@ class SoundViewModel(private val beatBox: BeatBox) : BaseObservable() {
             beatBox.play(it)
         }
     }
+
+    override fun onCleared() = beatBox.release()
 
 }
