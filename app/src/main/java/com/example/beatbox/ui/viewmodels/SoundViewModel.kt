@@ -1,14 +1,9 @@
 package com.example.beatbox.ui.viewmodels
 
-import android.content.Context
 import android.os.*
-import android.view.View
 import androidx.annotation.RequiresApi
-import androidx.databinding.BaseObservable
-import androidx.databinding.Bindable
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.example.beatbox.data.BeatBox
 import com.example.beatbox.domain.model.Sound
 
