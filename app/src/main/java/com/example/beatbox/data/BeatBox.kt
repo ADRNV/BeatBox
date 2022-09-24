@@ -15,11 +15,11 @@ private const val MAX_SOUNDS = 10
 
 class BeatBox(private val assets:AssetManager) {
 
-    val sounds:List<Sound> = loadSounds()
-
     private val soundPool = SoundPool.Builder()
         .setMaxStreams(MAX_SOUNDS)
         .build()
+
+    val sounds:List<Sound> = loadSounds()
 
     private fun loadSounds():List<Sound>{
 
