@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -8,16 +9,25 @@
             type="com.example.beatbox.ui.viewmodels.SoundViewModel" />
     </data>
 
-    <androidx.cardview.widget.CardView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="120dp"
         android:layout_height="120dp">
-    <Button
-        tools:text="Sound name"
-        android:id="@+id/sound_button"
-        android:layout_width="match_parent"
-        android:text="@{viewmodel.title}"
-        android:onClick="@{(view) -> viewmodel.onClick()}"
-        android:layout_height="match_parent"/>
 
-    </androidx.cardview.widget.CardView>
+        <Button
+            android:id="@+id/sound_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:onClick="@{(view) -> viewmodel.onClick()}"
+            android:text="@{viewmodel.title}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Sound name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

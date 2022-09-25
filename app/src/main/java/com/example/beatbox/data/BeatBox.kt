@@ -1,6 +1,7 @@
 package com.example.beatbox.data
 
 import android.content.res.AssetManager
+import android.graphics.Color
 import android.media.SoundPool
 import android.util.Log
 import com.example.beatbox.domain.model.Sound
@@ -76,9 +77,8 @@ class BeatBox(private val assets:AssetManager) {
 
     }
 
-    fun release(){
-
+    fun release() {
         soundPool.release()
-
     }
+
 }
