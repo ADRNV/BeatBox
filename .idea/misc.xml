@@ -3,8 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Programming/KotlinAndroid/BeatBox/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Programming/KotlinAndroid/BeatBox/app/src/main/res/layout/activity_main.xml" value="0.18" />
+        <entry key="..\:/Programming/KotlinAndroid/BeatBox/app/src/main/res/layout/floatseekbar.xml" value="0.10677083333333333" />
         <entry key="..\:/Programming/KotlinAndroid/BeatBox/app/src/main/res/layout/sound_button_item.xml" value="0.209375" />
+        <entry key="..\:/Programming/KotlinAndroid/BeatBox/app/src/main/res/xml/float_seek_bar.xml" value="0.10677083333333333" />
+        <entry key="..\:/Programming/KotlinAndroid/BeatBox/app/src/main/res/xml/styleable.xml" value="0.10677083333333333" />
         <entry key="..\:/Users/Auslander/source/Lamer0/BeatBox/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/Auslander/source/Lamer0/BeatBox/app/src/main/res/layout/sound_button_item.xml" value="0.33" />
       </map>

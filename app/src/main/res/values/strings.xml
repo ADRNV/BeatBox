@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">BeatBox</string>
     <string name="speed">Speed</string>
+   <string name="x_speed">x %.1f</string>
+
+        <declare-styleable name="FloatSeekBar">
+            <attr name="floatMax" format="float" />
+            <attr name="floatMin" format="float" />
+        </declare-styleable>
 </resources>

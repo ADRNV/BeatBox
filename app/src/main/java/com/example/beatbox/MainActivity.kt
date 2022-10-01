@@ -3,26 +3,71 @@ package com.example.beatbox
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ViewGroup
+import android.widget.SeekBar
+import android.widget.Toast
+import androidx.core.util.toHalf
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beatbox.databinding.ActivityMainBinding
 import com.example.beatbox.databinding.SoundButtonItemBinding
 import com.example.beatbox.data.BeatBox
 import com.example.beatbox.domain.model.Sound
+import com.example.beatbox.ui.viewmodels.SoundBoardViewModel
 import com.example.beatbox.ui.viewmodels.SoundViewModel
+import com.example.beatbox.ui.viewmodels.factories.SoundBoardViewModelFactory
+import com.example.beatbox.ui.views.FloatSeekBar
+import com.google.android.material.snackbar.Snackbar
+import java.math.RoundingMode
+import java.text.DecimalFormat
+import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var beatBox: BeatBox
+
+    private lateinit var soundBoardViewModelFactory:SoundBoardViewModelFactory
+
+    private val soundBoardViewModel by lazy {
+        ViewModelProvider(this, soundBoardViewModelFactory)[SoundBoardViewModel::class.java]
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         beatBox = BeatBox(assets)
 
+        soundBoardViewModelFactory = SoundBoardViewModelFactory(beatBox)
+
         val binding:ActivityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+        binding.soundSpeedSb.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                seekBar as FloatSeekBar
+                soundBoardViewModel.rate.postValue(seekBar.value)
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) = Unit
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?){
+
+                seekBar as FloatSeekBar
+
+                val message = resources.getString(R.string.x_speed,
+                    seekBar.value)
+
+                Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT)
+                    .show()
+            }
+        })
+
+        soundBoardViewModel.rate.observe(this){
+            soundBoardViewModel.beatBox.playParameters.rate = it
+            binding.speedShowTv.text = resources.getString(R.string.x_speed, it)
+        }
 
         binding.soundButtonsRv.apply {
 

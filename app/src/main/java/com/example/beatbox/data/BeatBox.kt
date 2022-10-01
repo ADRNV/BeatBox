@@ -4,6 +4,7 @@ import android.content.res.AssetManager
 import android.graphics.Color
 import android.media.SoundPool
 import android.util.Log
+import com.example.beatbox.domain.model.PlayParameters
 import com.example.beatbox.domain.model.Sound
 import java.io.IOException
 
@@ -20,6 +21,8 @@ class BeatBox(private val assets:AssetManager) {
         .build()
 
     val sounds:List<Sound> = loadSounds()
+
+    val playParameters: PlayParameters = PlayParameters()
 
     private fun loadSounds():List<Sound>{
 
@@ -71,7 +74,7 @@ class BeatBox(private val assets:AssetManager) {
 
         sound.soundId?.let {
 
-            soundPool.play(it, 1.0f, 1.0f, 1, 0, 1.0f)
+            soundPool.play(it, 1.0f, 1.0f, 1, 0, playParameters.rate)
 
         }
 

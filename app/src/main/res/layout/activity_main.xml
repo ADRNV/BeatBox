@@ -21,8 +21,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <SeekBar
+        <com.example.beatbox.ui.views.FloatSeekBar
             android:id="@+id/soundSpeed_sb"
+            app:floatMax="2"
+            app:floatMin="0.25"
+            android:value="1.0"
+            android:progress="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -31,6 +35,18 @@
             android:layout_weight="0.3"
             android:text="@string/speed"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/speedShow_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="1.0"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/soundSpeed_sb"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
