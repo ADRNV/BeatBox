@@ -1,10 +1,13 @@
 package com.example.beatbox
 
+import android.content.Context
+import android.os.*
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.util.toHalf
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -136,7 +139,7 @@ class MainActivity : AppCompatActivity() {
         override fun getItemCount() = _sounds.size
 
         inner class  SoundViewHolder(private val binding: SoundButtonItemBinding):
-            RecyclerView.ViewHolder(binding.root){
+            RecyclerView.ViewHolder(binding.root), View.OnLongClickListener{
 
             fun bind(sound: Sound){
 
@@ -148,6 +151,19 @@ class MainActivity : AppCompatActivity() {
 
                     executePendingBindings()
                 }
+            }
+
+            @RequiresApi(Build.VERSION_CODES.S)
+            override fun onLongClick(view: View?): Boolean {
+
+                val vibrator = view?.context
+                    ?.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
+
+                val vibrationEffect = VibrationEffect.createOneShot(200, 10)
+
+                vibrator.vibrate(CombinedVibration.createParallel(vibrationEffect))
+
+                return true
             }
         }
     }

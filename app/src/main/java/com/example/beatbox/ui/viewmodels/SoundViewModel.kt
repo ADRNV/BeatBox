@@ -19,15 +19,6 @@ class SoundViewModel(private val beatBox: BeatBox) : ViewModel() {
 
     @RequiresApi(Build.VERSION_CODES.S)
     fun onClick(){
-        /*
-        val vibrator = view.context
-            .getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
-
-        val vibrationEffect = VibrationEffect.createOneShot(200, 10)
-
-        vibrator.vibrate(CombinedVibration.createParallel(vibrationEffect))
-         */
-
         sound?.let {
             beatBox.play(it)
         }
